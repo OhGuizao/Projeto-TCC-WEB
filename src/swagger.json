@@ -1,0 +1,28 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Minha API",
+      "description": "Descrição da minha API"
+    },
+    "paths": {
+      "/user": {
+        "get": {
+            "tags": [
+                "User"
+            ],
+          "summary": "Obter lista de usuários",
+          "description": "Esta rota retorna uma lista de todos os usuários.",
+          "responses": {
+            "200": {
+              "description": "Recurso retornado com sucesso."
+            },
+            "500":{
+              "description":"Erro de conexão com o servidor"
+            }
+          }
+        }
+      }
+    }
+  }
+  
