@@ -1,28 +1,163 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0",
-      "title": "Minha API",
-      "description": "Descrição da minha API"
-    },
-    "paths": {
-      "/user": {
-        "get": {
-            "tags": [
-                "User"
-            ],
-          "summary": "Obter lista de usuários",
-          "description": "Esta rota retorna uma lista de todos os usuários.",
-          "responses": {
-            "200": {
-              "description": "Recurso retornado com sucesso."
-            },
-            "500":{
-              "description":"Erro de conexão com o servidor"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Minha API",
+    "description": "Descrição da minha API"
+  },
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Obter lista de usuários",
+        "description": "Esta rota retorna uma lista de todos os usuários.",
+        "responses": {
+          "200": {
+            "description": "Recurso retornado com sucesso."
+          },
+          "500": {
+            "description": "Erro de conexão com o servidor"
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Cadastrar novo usuário",
+        "description": "Esta rota permite cadastrar um novo usuário.",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Objeto do usuário a ser cadastrado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserInput"
             }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário cadastrado com sucesso."
+          },
+          "422": {
+            "description": "Erro de validação. Verifique os campos obrigatórios."
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/user/{cpfUsuario}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Obter usuário por CPF",
+        "description": "Esta rota retorna um usuário com base no CPF fornecido.",
+        "parameters": [
+          {
+            "name": "cpfUsuario",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "CPF do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recurso retornado com sucesso."
+          },
+          "404": {
+            "description": "Usuário não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/user/{idUsuario}":{
+
+      "put": {
+        "tags": ["User"],
+        "summary": "Atualizar usuário por ID",
+        "description": "Esta rota permite atualizar um usuário com base no ID fornecido.",
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado com sucesso."
+          },
+          "404": {
+            "description": "Usuário não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Excluir usuário por ID",
+        "description": "Esta rota permite excluir um usuário com base no ID fornecido.",
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do usuário"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Usuário excluído com sucesso."
+          },
+          "404": {
+            "description": "Usuário não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
         }
       }
     }
+  },
+  "definitions": {
+    "UserInput": {
+      "type": "object",
+      "properties": {
+        "tipoUsuario": {
+          "type": "string",
+          "example": ""
+        },
+        "nomeUsuario": {
+          "type": "string",
+          "example": ""
+        },
+        "cpfUsuario": {
+          "type": "string",
+          "example": ""
+        },
+        "idadeUsuario": {
+          "type": "integer",
+          "example": ""
+        },
+        "user": {
+          "type": "string",
+          "example": ""
+        },
+        "password": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    }
   }
-  
+}
