@@ -32,10 +32,10 @@ clientDB.connect((erro) => {
 });
 
 // Descomente para usar a forma padrão 
-//  app.use("/", (req, res) => {return res.status(200).json({ msg: "Bem-vindo à rota padrão!" })});
+ app.use("/", (req, res) => {return res.status(200).json({ msg: "Bem-vindo à rota padrão!" })});
 
 // Descomente para incluir a rota Swagger
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(allRoutes);
 

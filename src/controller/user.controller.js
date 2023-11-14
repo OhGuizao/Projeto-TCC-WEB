@@ -53,7 +53,11 @@ class UserController {
             // Verificar se o usuário existe
             const [rows] = await clientDB.query('SELECT * FROM tbusuario WHERE cpfUsuario = ?', [cpfUsuario]);
             if (rows.length > 0) {
-                return res.status(422).json({ msg: 'Este CPF já está registrado!' });
+                return res.status(400).json({ msg: 'Este CPF já está registrado!' });
+            }
+            // Verifica se está recebendo os campo de cpf e idade como number
+            if (cpfUsuario || idadeUsuario == String){
+                return res.status(400).json({msg:'Os seguintes campos precisam ser numeros: cpf, idade'})
             }
             // Inserir novo usuário
             const [result] = await clientDB.execute(
@@ -83,6 +87,10 @@ class UserController {
             console.log('Resultado da consulta ao banco de dados:', rows);
             if (rows.length === 0) {
                 return res.status(404).json({ msg: 'Usuário não encontrado!' });
+            }
+            // Verifica se está recebendo os campo de cpf e idade como number
+            if (cpfUsuario || idadeUsuario == String){
+                return res.status(400).json({msg:'Os seguintes campos precisam ser numeros: cpf, idade'})
             }
             // Update user details
             const [updatedUser] = await clientDB.query('UPDATE tbusuario SET tipoUsuario=?, nomeUsuario=?, idadeUsuario=?, user=?, password=? WHERE idUsuario=?',
